@@ -175,7 +175,7 @@ help: $(firstword $(MAKEFILE_LIST))
 count:
 	$(WC) $(SOURCES) $(INCLUDES)
 
-## all: Build all targets, same as 'make bin lib libpy'.
+## all: Build all targets.
 .PHONY: all
 all: bin
 

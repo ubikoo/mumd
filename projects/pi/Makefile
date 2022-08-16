@@ -33,18 +33,18 @@ CFLAGS   := -I.
 #	CFLAGS   += -I$(ROOTDIR)/include
 #
 # Include modules
-ROOTDIR	 := ../../../atto
+ROOTDIR	 := ../../atto
 include $(ROOTDIR)/atto/core.mk
 include $(ROOTDIR)/atto/math.mk
 include $(ROOTDIR)/atto/opengl.mk
 include $(ROOTDIR)/atto/opencl.mk
 
 # gladload module
-ROOTDIR	 := ../../../3rdparty/gladload
+ROOTDIR	 := ../../3rdparty/gladload
 include $(ROOTDIR)/makefile.mk
 
 # stb module
-ROOTDIR	 := ../../../3rdparty
+ROOTDIR	 := ../../3rdparty
 CFLAGS += -I$(ROOTDIR)
 
 # -----------------------------------------------------------------------------
