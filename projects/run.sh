@@ -41,14 +41,19 @@ ask() {
 }
 
 # -----------------------------------------------------------------------------
-# Execute
+# Run executables
 #
-execute() {
-    pushd "${1}"
-    popd
-}
 
-run make -f Makefile clean
-run make -f Makefile -j48 all
-run ./mumd.out
-run make -f Makefile clean
+pushd "empty"
+run make clean
+run make -j48 all
+run ./empty.out
+run make clean
+popd
+
+pushd "pi"
+run make clean
+run make -j48 all
+run mpirun ./pi.out
+run make clean
+popd

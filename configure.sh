@@ -67,19 +67,11 @@ git-subtree() {
 }
 
 # -----------------------------------------------------------------------------
-# Catch2
-# run install -d -m 755 3rdparty/Catch2
-# run wget https://github.com/catchorg/Catch2/releases/download/v2.13.3/catch.hpp \
-# 	-O 3rdparty/Catch2/catch.hpp
-
 # gladload
-# git-clone git@github.com:ubikoo/gladload.git 3rdparty/gladload
-
-# glm
-# git-clone git@github.com:ubikoo-3rdparty/glm.git 3rdparty/glm
+git-clone git@github.com:ubikoo/gladload.git 3rdparty/gladload
 
 # stb
-# git-clone git@github.com:ubikoo-3rdparty/stb.git 3rdparty/stb
+git-clone git@github.com:ubikoo-3rdparty/stb.git 3rdparty/stb
 
 # atto
 git-subtree atto git@github.com:ubikoo/atto.git

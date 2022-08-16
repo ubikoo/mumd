@@ -1,9 +1,9 @@
 # -----------------------------------------------------------------------------
 # Set the target macro
 ifeq ($(origin target), undefined)
-TARGET := mumd
+TARGET := pi
 else ifeq ($(target),)
-TARGET := mumd
+TARGET := pi
 else
 TARGET := $(target)
 endif
@@ -33,18 +33,18 @@ CFLAGS   := -I.
 #	CFLAGS   += -I$(ROOTDIR)/include
 #
 # Include modules
-ROOTDIR	 := ../../atto
+ROOTDIR	 := ../../../atto
 include $(ROOTDIR)/atto/core.mk
 include $(ROOTDIR)/atto/math.mk
 include $(ROOTDIR)/atto/opengl.mk
 include $(ROOTDIR)/atto/opencl.mk
 
 # gladload module
-ROOTDIR	 := ../../3rdparty/gladload
+ROOTDIR	 := ../../../3rdparty/gladload
 include $(ROOTDIR)/makefile.mk
 
 # stb module
-ROOTDIR	 := ../../3rdparty
+ROOTDIR	 := ../../../3rdparty
 CFLAGS += -I$(ROOTDIR)
 
 # -----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ UNAME   := $(shell uname -s)
 
 # Darwin kernel flags
 ifeq ($(UNAME), Darwin)
-CC      := g++-mp-9
+CC      := mpicxx
 
 CFLAGS  += -march=native -Wa,-q
 CFLAGS  += -I/opt/local/include -I/usr/local/include -Wall -std=c++14
@@ -92,7 +92,7 @@ endif
 
 # Linux kernel flags
 ifeq ($(UNAME), Linux)
-CC      := g++
+CC      := mpicxx
 
 CFLAGS  += -march=native -mavx
 CFLAGS  += -I/usr/include -Wall -std=c++14
@@ -175,7 +175,7 @@ help: $(firstword $(MAKEFILE_LIST))
 count:
 	$(WC) $(SOURCES) $(INCLUDES)
 
-## all: Build all targets, same as 'make bin lib libpy'.
+## all: Build all targets.
 .PHONY: all
 all: bin
 
