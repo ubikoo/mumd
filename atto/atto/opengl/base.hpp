@@ -39,16 +39,4 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-/**
- * GLM headers.
-#define GLM_FORCE_CXX11
-#define GLM_FORCE_AVX
-#define GLM_FORCE_INLINE
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/transform.hpp>
-#include <glm/gtx/rotate_vector.hpp>
- */
-
 #endif /* ATTO_OPENGL_BASE_H_ */

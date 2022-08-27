@@ -75,9 +75,6 @@ run wget https://github.com/catchorg/Catch2/releases/download/v2.13.3/catch.hpp 
 # gladload
 git-clone git@github.com:ubikoo/gladload.git 3rdparty/gladload
 
-# glm
-#git-clone git@github.com:ubikoo-3rdparty/glm.git 3rdparty/glm
-
 # stb
 git-clone git@github.com:ubikoo-3rdparty/stb.git 3rdparty/stb
 
