@@ -36,7 +36,6 @@ UNAME   := $(shell uname -s)
 # Darwin kernel flags
 ifeq ($(UNAME), Darwin)
 CC      := gcc-mp-9
-SWIG    := /opt/local/bin/swig -python -I/opt/local/include -I/include
 
 CFLAGS  += -march=native -mavx -Wa,-q
 CFLAGS  += -I/opt/local/include -Wall -std=c99
@@ -49,7 +48,6 @@ endif
 # Linux kernel flags
 ifeq ($(UNAME), Linux)
 CC      := gcc
-SWIG    := /usr/bin/swig -python -I/usr/include -I/include
 
 CFLAGS  += -march=native -mavx
 CFLAGS  += -I/usr/include -Wall -std=c99
@@ -58,34 +56,17 @@ CFLAGS  += -fPIC -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 LDFLAGS += -L/usr/lib64 -Wl,-rpath,/usr/lib64 -lm
 endif
 
-# Enable Debug flags
-ifeq ($(origin debug), undefined)
-DEBUG := no
-else ifeq ($(debug),)
-DEBUG := no
-else
-DEBUG := $(debug)
-endif
-
-ifeq ($(strip $(DEBUG)),yes)
-CFLAGS  += -g -ggdb -O1 -pedantic -fopt-info-vec-optimized
-else
+# Enable/disable debug flags
+# CFLAGS  += -g -ggdb -O0 -pedantic -fopt-info-vec-optimized
 CFLAGS  += -Ofast
-endif
 
-# Enable OpenMP flags
-ifeq ($(origin omp), undefined)
-OPENMP := yes
-else ifeq ($(omp),)
-OPENMP := yes
-else
-OPENMP := $(omp)
-endif
-
-ifeq ($(strip $(OPENMP)),yes)
+# Enable/disable OpenMP flags
 CFLAGS  += -fopenmp
 LDFLAGS += -fopenmp
-endif
+
+# Enable/disable Pthreads flags
+# CFLAGS  += -pthread
+# LDFLAGS += -pthread
 
 # -----------------------------------------------------------------------------
 # Target rules
@@ -96,7 +77,7 @@ define makehelp
 	@$(AWK) \
 		'BEGIN \
 		{ \
-			printf("\nusage: make [\033[0;36mtarget\033[0m]\n\n"); \
+			printf("\nusage: make [\033[0;36mtarget\033[0m]\n"); \
 		} \
 		{ \
 			if ($$1 == "##") { \
@@ -107,13 +88,7 @@ define makehelp
 		} \
 		END \
 		{ \
-			printf("\nOptional Features:\n\n"); \
-			printf("\033[0;36m %-16s \033[0mSet target name (default=%s).\n", \
-					"target=[arg]", "$(TARGET)"); \
-			printf("\033[0;36m %-16s \033[0mEnable debug (default=%s).\n", \
-					"debug=[yes|no]", "no"); \
-			printf("\033[0;36m %-16s \033[0mEnable openmp (default=%s).\n", \
-					"omp=[yes|no]", "yes"); \
+			printf "\n"; \
 		}' < $(1)
 endef
 
@@ -127,7 +102,7 @@ help: $(firstword $(MAKEFILE_LIST))
 count:
 	$(WC) $(SOURCES) $(INCLUDES)
 
-## all: Build all targets, same as 'make bin lib libpy'.
+## all: Build all targets.
 .PHONY: all
 all: bin
 
