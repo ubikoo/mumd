@@ -40,6 +40,7 @@ git-clone() {
 	local GITURL="${1}"
 	local DIRECTORY="${2}"
 
+    [[ -d "${DIRECTORY}" ]] && run rm -rf "${DIRECTORY}"
 	run install -d -m 755 "${DIRECTORY}"
 	run git clone --depth 1 "${GITURL}" "${DIRECTORY}"
 }
@@ -74,4 +75,4 @@ git-clone git@github.com:ubikoo/gladload.git 3rdparty/gladload
 git-clone git@github.com:ubikoo-3rdparty/stb.git 3rdparty/stb
 
 # atto
-git-subtree atto git@github.com:ubikoo/atto.git
+git-clone git@github.com:ubikoo/atto.git 3rdparty/atto
